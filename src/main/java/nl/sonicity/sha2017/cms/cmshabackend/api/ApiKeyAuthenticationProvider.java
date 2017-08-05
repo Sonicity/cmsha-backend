@@ -21,6 +21,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
@@ -44,10 +45,13 @@ public class ApiKeyAuthenticationProvider implements org.springframework.securit
 
     private PublicKey validationKey;
 
+    @Value("${jwt.publickey.file}")
+    private String jwtVerificationKeyFile;
+
     @PostConstruct
     public void initializeCertificates() {
         try {
-            ClassPathResource classPathResource = new ClassPathResource("jwtRS256.key.pub");
+            ClassPathResource classPathResource = new ClassPathResource(jwtVerificationKeyFile);
             DataInputStream dis = new DataInputStream(classPathResource.getInputStream());
             byte[] keyBytes = new byte[dis.available()];
             dis.readFully(keyBytes);
