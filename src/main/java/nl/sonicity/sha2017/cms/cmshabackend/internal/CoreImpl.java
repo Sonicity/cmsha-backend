@@ -18,6 +18,7 @@ package nl.sonicity.sha2017.cms.cmshabackend.internal;
 import nl.sonicity.sha2017.cms.cmshabackend.api.exceptions.ResourceNotFoundException;
 import nl.sonicity.sha2017.cms.cmshabackend.api.exceptions.ZoneAlreadyClaimedException;
 import nl.sonicity.sha2017.cms.cmshabackend.api.models.Claim;
+import nl.sonicity.sha2017.cms.cmshabackend.api.models.Coordinate;
 import nl.sonicity.sha2017.cms.cmshabackend.api.models.Zone;
 import nl.sonicity.sha2017.cms.cmshabackend.persistence.ActiveClaimRepository;
 import nl.sonicity.sha2017.cms.cmshabackend.persistence.CueLocationRepository;
@@ -35,6 +36,7 @@ import org.springframework.stereotype.Component;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -110,7 +112,11 @@ public class CoreImpl implements Core {
         boolean available = fireLotteryService.getFireSystemAvailable();
         String claimTicket = fireLotteryService.enterDraw().orElse(null);
 
-        Zone flameThrower = new Zone("FlameThrowers", available, null, Collections.emptyList(), claimTicket);
+        List<Coordinate> towerLocations = new ArrayList<>();
+        towerLocations.add(new Coordinate(52.284546, 5.525769));
+        towerLocations.add(new Coordinate(52.283224, 5.525218));
+
+        Zone flameThrower = new Zone("FlameThrowers", available, null, towerLocations, claimTicket);
         return Collections.singletonList(flameThrower);
     }
 }
