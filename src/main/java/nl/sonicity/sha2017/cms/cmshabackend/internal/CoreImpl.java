@@ -113,8 +113,8 @@ public class CoreImpl implements Core {
         String claimTicket = fireLotteryService.enterDraw().orElse(null);
 
         List<Coordinate> towerLocations = new ArrayList<>();
-        towerLocations.add(new Coordinate(52.284546, 5.525769));
-        towerLocations.add(new Coordinate(52.283224, 5.525218));
+        //towerLocations.add(new Coordinate(52.284546, 5.525769));
+        //towerLocations.add(new Coordinate(52.283224, 5.525218));
 
         Zone flameThrower = new Zone("FlameThrowers", available, null, towerLocations, claimTicket);
         return Collections.singletonList(flameThrower);
