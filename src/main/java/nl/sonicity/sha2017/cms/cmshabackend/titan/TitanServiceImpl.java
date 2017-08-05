@@ -78,6 +78,10 @@ public class TitanServiceImpl implements TitanService {
 
                 // Set Blue 0%
                 titanDispatcher.programmerEditorFixturesSetControlValue(FixtureControlId.BLUE, 1, blue, true, false);
+
+                // Set Strobe 0%
+                // FIXME wtf is the strobe
+                // titanDispatcher.programmerEditorFixturesSetControlValue(FixtureControlId.STRO, 1, blue, true, false);
             } catch (ValueOutOfRangeException e) {
                 throw new IllegalStateException("Invalid arguments for internal function", e);
             }

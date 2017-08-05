@@ -15,10 +15,7 @@
  */
 package nl.sonicity.sha2017.cms.cmshabackend.api;
 
-import nl.sonicity.sha2017.cms.cmshabackend.api.models.FlamerClaimRequest;
-import nl.sonicity.sha2017.cms.cmshabackend.api.models.FlamerClaimResponse;
-import nl.sonicity.sha2017.cms.cmshabackend.api.models.FlamerFireRequest;
-import nl.sonicity.sha2017.cms.cmshabackend.api.models.FlamerFireResponse;
+import nl.sonicity.sha2017.cms.cmshabackend.api.models.*;
 import nl.sonicity.sha2017.cms.cmshabackend.persistence.entities.SpecialZoneClaim;
 import nl.sonicity.sha2017.cms.cmshabackend.titan.TitanService;
 import org.junit.Test;
@@ -72,6 +69,9 @@ public class FlamerControllerIT extends AbstractRestControllerIT {
         firedFlameZone = specialZoneClaimRepository.findOneByZoneName("FlameThrowers")
                 .orElseThrow(() -> new Exception("Mock data not present"));
         assertThat(firedFlameZone.getClaimExpiration(), equalTo(Duration.ofMinutes(2)));
+
+        FlamerStatusResponse status = restTemplate.getForObject("http://localhost:{port}/flamer/status", FlamerStatusResponse.class, localServerPort);
+        assertThat(status.isAvailable(), equalTo(false));
     }
 
 }

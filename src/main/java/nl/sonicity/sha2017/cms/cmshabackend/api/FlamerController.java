@@ -65,6 +65,12 @@ public class FlamerController {
         return new FlamerFireResponse(convertInternalTimeToNlTime(expiration));
     }
 
+    @RequestMapping(path="/status", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @PreAuthorize("hasAuthority('ANONYMOUS') or hasRole('ROLE_ADMIN')")
+    public FlamerStatusResponse status() {
+        return new FlamerStatusResponse(fireLotteryService.getFireSystemAvailable());
+    }
+
     private LocalDateTime convertInternalTimeToNlTime(LocalDateTime localDateTime) {
         ZonedDateTime ldtZoned = localDateTime.atZone(ZoneId.systemDefault());
         ZonedDateTime nlZoned = ldtZoned.withZoneSameInstant(ZoneId.of("Europe/Amsterdam"));
