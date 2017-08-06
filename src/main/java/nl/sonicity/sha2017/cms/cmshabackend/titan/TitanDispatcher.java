@@ -320,6 +320,16 @@ public class TitanDispatcher {
                 .exchange(requestUrl, HttpMethod.POST, new HttpEntity<>(Boolean.toString(blindActive)), Void.class);
     }
 
+    public void setGroupPage(String groupName, int page) {
+        UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(baseUrl)
+                .path("/titan/script/2/Handles/SetGroupPage")
+                .queryParam("groupName", groupName)
+                .queryParam("page", page);
+
+        String requestUrl = builder.build().encode().toString();
+        executeTitanScriptCall(requestUrl);
+    }
+
     private ResponseEntity<Void> executeTitanScriptCall(String requestUrl) {
         try {
             return restTemplate.exchange(requestUrl, HttpMethod.GET, null, Void.class);

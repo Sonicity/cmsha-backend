@@ -97,6 +97,7 @@ public class TitanServiceImpl implements TitanService {
                 titanDispatcher.playbacksReplacePlaybackCue(currentHandle.get().getTitanId(), false);
                 playbackHandle = currentHandle.get();
             } else {
+                titanDispatcher.setGroupPage("PlaybackWindow", 0);
                 titanDispatcher.playbacksStoreCue(cueLocation.getGroup(), cueLocation.getIndex(), true);
                 try {
                     Thread.sleep(1000);

@@ -142,11 +142,13 @@ public class TitanDispatcherIT {
         // Set Macro "Safe"
         // Set Mode "Dimmer"
 
-        HandleLocation cueLocation = new HandleLocation("PlaybackWindow", 0, 0);
+        HandleLocation cueLocation = new HandleLocation("PlaybackWindow", 24, 0);
 
         // Check contents of the target location
         Optional<Handle> currentHandle = titanDispatcher.getHandleByLocation(cueLocation);
         assertThat(currentHandle.isPresent(), equalTo(false));
+
+        titanDispatcher.setGroupPage("PlaybackWindow", 0);
 
         titanDispatcher.playbacksStoreCue(cueLocation.getGroup(), cueLocation.getIndex(), true);
 
