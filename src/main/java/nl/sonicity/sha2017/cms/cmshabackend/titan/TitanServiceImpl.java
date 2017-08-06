@@ -98,6 +98,12 @@ public class TitanServiceImpl implements TitanService {
                 playbackHandle = currentHandle.get();
             } else {
                 titanDispatcher.playbacksStoreCue(cueLocation.getGroup(), cueLocation.getIndex(), true);
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    // Ignore and rethrow
+                    throw new RuntimeException(e);
+                }
                 playbackHandle = titanDispatcher.getHandleByLocation(cueLocation)
                         .orElseThrow(() -> new ResourceNotFoundException("Handle not found by location"));
             }
