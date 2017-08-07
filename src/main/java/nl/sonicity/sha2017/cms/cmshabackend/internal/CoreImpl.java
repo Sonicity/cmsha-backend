@@ -92,7 +92,7 @@ public class CoreImpl implements Core {
         titanService.activateCue(rgbCue.getTitanId());
 
         Colour claimColour = new Colour(claim.getRed(), claim.getGreen(), claim.getBlue());
-        ActiveClaim activeClaim = new ActiveClaim(LocalDateTime.now(), Duration.ofMinutes(10), rgbCue.getTitanId(), claimColour);
+        ActiveClaim activeClaim = new ActiveClaim(LocalDateTime.now(), Duration.ofMinutes(1), rgbCue.getTitanId(), claimColour);
         activeClaimRepository.save(activeClaim);
 
         zoneMapping.setActiveClaim(activeClaim);
